@@ -1,0 +1,134 @@
+body {
+  padding: 0 50px 50px 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00b7ff;
+}
+
+header {
+  height: 120px;
+}
+
+.bcc-purle {
+  background: #2c045e;
+  color: #fff !important;
+}
+
+.bcc-purle2 {
+  background: #d84efb;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.bg-lightRed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.bg-lightRed2 {
+  background: #ec949b;
+  color: #721c24;
+}
+
+.bg-lightGreen {
+  background: #d4edda;
+  color: #155724;
+}
+.bg-lightGreen2 {
+  background: #97d8a6;
+  color: #155724;
+}
+
+.bg-lightBlue {
+  background: #cce5ff;
+  color: #04245e;
+}
+.bg-lightBlue2 {
+  background: #6cb5ec;
+  color: #04245e;
+}
+
+.bg-lightYellow {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.bg-lightYellow2 {
+  background: #f9d975;
+  color: #856404;
+}
+
+.bg-lightPurple {
+  background: #e8c3fa;
+  color: #471683;
+}
+.bg-lightPurple2 {
+  background: #c6acf7;
+  color: #471683;
+}
+
+.bg-lightCyan {
+  background: #b4efe4;
+  color: #036072;
+}
+
+.bg-lightCyan2 {
+  background: #6af8de;
+  color: #036072;
+}
+
+.gap-1 {
+  gap: 2px;
+}
+
+.pos-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.middle-y {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.right-0 {
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+#controlPadShow {
+  width: 7%;
+  height: 7%;
+  left: 98%;
+  text-align: center;
+}
+.centered-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#controlPad{
+  width: 40%;
+  height: auto;
+  padding: 24px;
+  
+}
+
+.d-none {
+  display: none;
+}
+
+input[type=range] {
+  appearance: slider-vertical;
+}
+
+.show {
+  display: block;
+}
+

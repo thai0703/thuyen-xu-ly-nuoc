@@ -1,0 +1,471 @@
+<html>
+
+<head>
+  <title>Thuyền xử lý nước</title>
+  <meta name="description" content="website for controlling and keep track of the boat">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+
+</head>
+
+<body>
+  <div class="container px-4">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bcc-purle rounded">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+        <span class="fs-4 bcc-purle fw-bolder fs-2">Thuyền xử lý nước</span>
+      </a>
+    </header>
+    <div class="h1 mt-4 ">Khí</div>
+    <div class="row g-5 py-2 gap-1">
+      <div class="col rounded bg-lightRed">
+        <div class="row p-3">
+          <div class="col rounded text-center p-1 bg-lightRed2">
+            <div class="h2">Nhiệt độ</div>
+            <div id="temp" class="h1">25</div>
+            <div>(độ C)</div>
+            <div id="temp_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="tempChart"> </canvas></div>
+        </div>
+      </div>
+      <div class="col rounded bg-lightGreen">
+        <div class="row p-3">
+          <div class="col rounded text-center p-1 bg-lightGreen2">
+            <div class="h2">Độ ẩm</div>
+            <div id="humi" class="h1">50</div>
+            <div>(%)</div>
+            <div id="humi_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="humiChart"> </canvas></div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-5  py-2 gap-1">
+      <div class="col rounded bg-lightBlue">
+        <div class="row p-3">
+          <div class="col rounded text-center p-1 bg-lightBlue2">
+            <div class="h2">CO2</div>
+            <div id="co2" class="h1">1</div>
+            <div>(ppm)</div>
+            <div id="co2_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="co2Chart"> </canvas></div>
+        </div>
+      </div>
+      <div class="col rounded bg-lightYellow">
+        <div class="row p-3">
+          <div class="col rounded text-center p-1 bg-lightYellow2">
+            <div class="h2">Co</div>
+            <div id="co" class="h1">0.4</div>
+            <div>(ppm)</div>
+            <div id="co_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="coChart"> </canvas></div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-5  py-2 gap-1">
+      <div class="col rounded bg-lightCyan">
+        <div class="row p-3">
+          <div class="col rounded text-center p-1 bg-lightCyan2">
+            <div class="h2">NH4</div>
+            <div id="nh4" class="h1">1</div>
+            <div>(ppm)</div>
+            <div id="nh4_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="nh4Chart"> </canvas></div>
+        </div>
+      </div>
+      <div class="col rounded bg-lightPurple">
+        <div class="row p-3">
+          <div class="col rounded text-center p-1 bg-lightPurple2">
+            <div class="h2">Dust</div>
+            <div id="dust" class="h1">0.4</div>
+            <div>(ppm)</div>
+            <div id="dust_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="dustChart"> </canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="h1 mt-4 ">Nước</div>
+    <div class="row g-5 py-2 gap-1">
+      <div class="col rounded bg-lightRed">
+        <div class="row p-3">
+          <div class="col-sm rounded text-center p-1 bg-lightRed2">
+            <div class="h2">Nhiệt độ nước</div>
+            <div id="water_temp" class="h1">25</div>
+            <div>(độ C)</div>
+            <div id="water_temp_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="water_tempChart"> </canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col rounded bg-lightGreen">
+        <div class="row p-3">
+          <div class="col-sm rounded text-center p-1 bg-lightGreen2">
+            <div class="h2">pH</div>
+            <div id="ph" class="h1">7.0</div>
+            <div>(---)</div>
+            <div id="ph_assessment">No assessment</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="phChart"> </canvas></div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-5  py-2 gap-1">
+      <div class="col rounded bg-lightBlue">
+        <div class="row p-3">
+          <div class="col-sm rounded text-center p-1 bg-lightBlue2">
+            <div class="h2">TDS</div>
+            <div id="tds" class="h1">50</div>
+            <div>(ppm)</div>
+            <div id="tds_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="tdsChart"> </canvas></div>
+        </div>
+      </div>
+      <div class="col rounded bg-lightYellow">
+        <div class="row p-3">
+          <div class="col-sm rounded text-center p-1 bg-lightYellow2">
+            <div class="h2">Tốc độ gió</div>
+            <div id="windSpeed" class="h1">2</div>
+            <div>(m/s)</div>
+            <div id="windSpeed_assessment">Normal</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="windSpeedChart"> </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-5  py-2 gap-1">
+      <div class="col rounded bg-lightCyan">
+        <div class="row p-3">
+          <div class="col-sm rounded text-center p-1 bg-lightCyan2">
+            <div class="h2">Lượng mưa</div>
+            <div id="flow" class="h1">1</div>
+            <div>(ml/h)</div>
+            <div id="flow_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="flowChart"> </canvas></div>
+        </div>
+      </div>
+      <div class="col rounded bg-lightPurple">
+        <div class="row p-3">
+          <div class="col-sm rounded text-center p-1 bg-lightPurple2">
+            <div class="h2">Mực nước</div>
+            <div id="wlevel" class="h1">0.4</div>
+            <div>(cm)</div>
+            <div id="wlevel_assessment">Good</div>
+          </div>
+          <div class="col"> <canvas class="bg-light " style="width: auto; height: 100%;" id="wlevelChart"> </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="controlPadShow" class="pos-fixed middle-y right-0 border rounded centered-text">
+    Control Panel
+  </div>
+
+  <div id="controlPad" class=" d-none position-fixed top-50 start-50 translate-middle rounded bg-lightCyan">
+    <div class="h2 text-center">
+      Bảng điều khiển
+    </div>
+    <div class="d-flex justify-content-around">
+      <!-- for easier control, only use one slider to change the speed -->
+      <!-- <div class="d-flex flex-column-reverse border border-primary bg-lightBlue2 rounded p-3">
+        <label for="leftMotor">leftMotor Speed</label>
+        <input type="range" name="leftMotor" id="leftMotor" min="0" max="255" value="0">
+      </div> -->
+      <div class="d-flex flex-column-reverse border border-primary bg-lightBlue2 rounded p-3">
+        <!-- now we only have two motor (left and right), but the right motor is connected to the old pin of middle motor so we keep all the ids-->
+        <label for="middleMotor">Speed</label>
+        <input type="range" name="middleMotor" id="middleMotor" min="0" max="255" value="0">
+      </div>
+    </div>
+    <div class="d-flex justify-content-around mt-4">
+      <button id="turnLeft" class="rounded ">Turn left</button>
+      <button id="Straight" class="rounded ">Straight</button>
+      <button id="turnRight" class="rounded">Turn right</button>
+    </div>
+    <div class="d-flex justify-content-around">
+      <button id="stop" class="bg-danger rounded">Stop</button>
+    </div>
+    <div class="d-flex justify-content-around">
+      <button id="pump_on" class="rounded bg-success">Turn pump on</button>
+      <button id="pump_off" class="rounded bg-danger">Turn pump off</button>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+      <label for="ph_threshold">Set pH threshold: </label>
+      <input type="text" value="7.0" id="ph_threshold">
+      <button id="set_ph" class="rounded bg-primary">Set</button>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+      <div class="h3">Current mode: <span id="mode_current">Comfort Mode</span></div>
+      <button id="mode_comfort_btn">Comfort Mode</button>
+      <button id="mode_normal_btn">Normal Mode</button>
+      <button id="mode_sport_btn">Sport Mode</button>
+    </div>
+  </div>
+
+  <!-- normal script -->
+  <script>
+    const controlPad = document.getElementById("controlPad");
+    const controlPadShow = document.getElementById("controlPadShow");
+    // const leftMotor = document.getElementById("leftMotor");
+    const middleMotor = document.getElementById("middleMotor");
+    // const rightMotor = document.getElementById("rightMotor");
+    const turnLeft = document.getElementById("turnLeft");
+    const turnRight = document.getElementById("turnRight");
+    const straight = document.getElementById("Straight");
+    const stop = document.getElementById("stop");
+    const pump_on = document.getElementById("pump_on");
+    const pump_off = document.getElementById("pump_off");
+    const set_ph = document.getElementById("set_ph");
+    const ph_threshold = document.getElementById("ph_threshold");
+    const mode_comfort_btn = document.getElementById("mode_comfort_btn");
+    const mode_normal_btn = document.getElementById("mode_normal_btn");
+    const mode_sport_btn = document.getElementById("mode_sport_btn");
+    const mode_current = document.getElementById("mode_current");
+    //show control pad on click
+    controlPadShow.addEventListener("click", () => {
+      console.log("click")
+      controlPad.classList.remove("d-none");
+      controlPad.classList.add("show");
+    });
+
+    //hide control pad if click outside
+    document.addEventListener("click", (e) => {
+      if (!controlPad.contains(e.target) && !controlPadShow.contains(e.target)) {
+        console.log(e.target)
+        controlPad.classList.remove("show");
+        controlPad.classList.add("d-none");
+      }
+    });
+
+    //change mode
+    mode_comfort_btn.addEventListener("click", () => {
+      modeChange(1);
+    })
+
+    mode_normal_btn.addEventListener("click", () => {
+      modeChange(2);
+    })
+
+    mode_sport_btn.addEventListener("click", () => {
+      modeChange(3);
+    })
+
+    function modeChange(mode) {
+      if (mode == 1) {
+        mode_current.innerHTML = "Comfort Mode";
+        // leftMotor.max = Math.floor(255 * 60 /100);
+        middleMotor.max = Math.floor(255 * 60 / 100);
+      } else if (mode == 2) {
+        mode_current.innerHTML = "Normal Mode";
+        // leftMotor.max = Math.floor(255 * 80 / 100);
+        middleMotor.max = Math.floor(255 * 80 / 100);
+      } else if (mode == 3) {
+        mode_current.innerHTML = "Sport Mode";
+        // leftMotor.max = 255;
+        middleMotor.max = 255;
+      }
+    }
+  </script>
+  <!-- socket -->
+  <script src="../socket.io/socket.io.js"></script>
+  <script>
+    const control = {
+      leftMotor: 0,
+      middleMotor: 0,
+      rightMotor: 0,
+      turnLeft: 0,
+      turnRight: 0,
+      pump: 0,
+      phThreshold: 7.0
+    }
+
+    const temp = document.getElementById("temp");
+    const humi = document.getElementById("humi");
+    const co2 = document.getElementById("co2");
+    const co = document.getElementById("co");
+    const nh4 = document.getElementById("nh4");
+    const dust = document.getElementById("dust");
+    const water_temp = document.getElementById("water_temp");
+    const ph = document.getElementById("ph");
+    const tds = document.getElementById("tds");
+    const windSpeed = document.getElementById("windSpeed");
+    const flow = document.getElementById("flow");
+    const wlevel = document.getElementById("wlevel");
+
+
+    var socket = io();
+    socket.on('connect', function () {
+      console.log('Connected!');
+    });
+
+    socket.on("/web/envir", (data) => {
+      temp.innerHTML = data.temp;
+      humi.innerHTML = data.humi;
+      co2.innerHTML = data.co2;
+      co.innerHTML = data.co;
+      nh4.innerHTML = data.NH4;
+      dust.innerHTML = data.dust;
+      water_temp.innerHTML = data.tempDS18B20;
+      ph.innerHTML = data.ph;
+      tds.innerHTML = data.tds;
+      windSpeed.innerHTML = data.windSpeed;
+      flow.innerHTML = data.flow;
+      wlevel.innerHTML = data.waterLevel;
+
+      let chartData = [data.temp, data.humi, data.co2, data.co, data.NH4, data.dust, data.tempDS18B20, data.ph, data.tds, data.windSpeed, data.flow, data.waterLevel]
+
+      charts.forEach((chart, index) => {
+        addData(chart, chartData[index])
+        if (chart.data.datasets[0].data.length > 30) {
+          removeData(chart)
+        }
+      })
+      console.log(data)
+    })
+
+    turnLeft.addEventListener("mousedown", () => {
+      control.turnLeft = 1;
+      control.turnRight = 0;
+      socket.emit("/web/control", control)
+      console.log(control)
+    })
+
+    turnRight.addEventListener("mousedown", () => {
+      control.turnRight = 1;
+      control.turnLeft = 0;
+      socket.emit("/web/control", control)
+      console.log(control)
+    })
+
+    straight.addEventListener("click", () => {
+      control.turnRight = 0;
+      control.turnLeft = 0;
+      socket.emit("/web/control", control)
+      console.log(control)
+    })
+
+    // leftMotor.addEventListener("change", () => {
+    //   control.leftMotor = leftMotor.value;
+    //   socket.emit("/web/control", control)
+    // })
+
+    middleMotor.addEventListener("change", () => {
+      control.middleMotor = middleMotor.value;
+      control.leftMotor = middleMotor.value; //same speed for both motor
+      socket.emit("/web/control", control)
+    })
+
+    // rightMotor.addEventListener("change", () => {
+    //   control.rightMotor = rightMotor.value;
+    //   socket.emit("/web/control", control)
+    // })
+
+    stop.addEventListener("click", () => {
+      control.leftMotor = 0;
+      control.middleMotor = 0;
+      control.rightMotor = 0;
+      // leftMotor.value = 0; 
+      middleMotor.value = 0;
+      // rightMotor.value = 0;
+      socket.emit("/web/control", control)
+    })
+
+    pump_on.addEventListener("click", () => {
+      control.pump = 1;
+      socket.emit("/web/control", control)
+    })
+
+    pump_off.addEventListener("click", () => {
+      control.pump = 0
+      socket.emit("/web/control", control)
+    })
+
+    set_ph.addEventListener("click", () => {
+      control.phThreshold = ph_threshold.value;
+      if (control.phThreshold < 0 || control.phThreshold > 14) {
+        alert("pH threshold must be between 0 and 14")
+        return;
+      }
+      socket.emit("/web/control", control)
+    })
+
+  </script>
+  <!-- chart -->
+  <script>
+    function chartConfigGen(label, data, color) {
+      return {
+        type: "line",
+        data: {
+          labels: [
+            60, 58, 56, 54, 52, 50, 48, 46, 44, 42, 40, 38, 36, 34, 32, 30, 28,
+            26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0,
+          ],
+          datasets: [
+            {
+              label: label,
+              data: data,
+              borderColor: color,
+              tension: 0.1,
+            },
+          ],
+          options: {
+            responsive: true,
+          },
+        },
+        options: {
+          responsive: true,
+        },
+      };
+    }
+
+    let labels = ["Nhiệt độ", "Độ ẩm", "CO2", "co", "nh4", "dust", "Nhiệt độ nước", "pH", "TDS", "Tốc độ gió", "Lưu lượng mưa", "Mực nước"]
+    let data = [25, 50, 1, 0.4, 1, 0.4, 25, 7.0, 50, 2, 1, 0.4]
+    let colors = ["red", "green", "blue", "yellow", "cyan", "purple", "red", "green", "blue", "yellow", "cyan", "purple"]
+    let chartids = ["tempChart", "humiChart", "co2Chart", "coChart", "nh4Chart", "dustChart", "water_tempChart", "phChart", "tdsChart", "windSpeedChart", "flowChart", "wlevelChart"]
+    const charts = [];
+    const chartConfigs = [];
+    for (let i = 0; i < labels.length; i++) {
+      chartConfigs[i] = chartConfigGen(labels[i], [data[i]], colors[i]);
+      charts[i] = new Chart(
+        document.getElementById(chartids[i]).getContext("2d"),
+        chartConfigs[i]
+      );
+    }
+
+  </script>
+  <!-- update chart -->
+  <script>
+    function addData(chart, data) {
+      chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+      });
+      chart.update();
+    }
+
+    function removeData(chart) {
+      chart.data.datasets.forEach((dataset) => {
+        dataset.data.shift();
+      });
+      chart.update();
+    }
+  </script>
+</body>
+
+</html>
